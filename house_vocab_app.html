@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Cozy House 🏠 — Vocabulary Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg-1: #fff4e6;
+  --bg-2: #ffe8d6;
+  --bg-3: #ffd6a5;
+  --paper: #fffaf2;
+  --ink: #2b2118;
+  --ink-soft: #6b5b4e;
+  --primary: #ff6b6b;
+  --primary-dark: #e84545;
+  --secondary: #4ecdc4;
+  --secondary-dark: #2fb5ac;
+  --accent: #ffd166;
+  --accent-dark: #f4b942;
+  --purple: #a685e2;
+  --green: #6bcf7f;
+  --red: #ef476f;
+  --shadow: 0 6px 0 rgba(43, 33, 24, 0.15);
+  --shadow-pressed: 0 2px 0 rgba(43, 33, 24, 0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  background: var(--bg-1);
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(255, 209, 102, 0.4) 0px, transparent 200px),
+    radial-gradient(circle at 90% 20%, rgba(166, 133, 226, 0.25) 0px, transparent 250px),
+    radial-gradient(circle at 50% 90%, rgba(78, 205, 196, 0.25) 0px, transparent 300px);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, .display { font-family: 'Fredoka', 'Nunito', sans-serif; font-weight: 600; letter-spacing: -0.01em; }
+
+/* ========== Layout ========== */
+.app {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 18px 80px;
+}
+
+header.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand .logo {
+  font-size: 38px;
+  filter: drop-shadow(0 3px 0 rgba(0,0,0,0.1));
+  animation: bob 3s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.brand h1 {
+  font-size: 26px;
+  color: var(--ink);
+}
+.brand h1 small {
+  display: block;
+  font-family: 'Nunito';
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.streak {
+  background: var(--accent);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 8px 14px;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ========== Step navigation ========== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  padding: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 22px;
+  position: relative;
+}
+.step-btn {
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 10px 6px;
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  color: var(--ink-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.step-btn .icon { font-size: 22px; }
+.step-btn .num {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--ink);
+  color: var(--paper);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.step-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.step-btn.active .num { background: var(--accent); color: var(--ink); }
+.step-btn.done .num { background: var(--green); color: var(--paper); }
+.step-btn.done .num::after { content: '✓'; }
+.step-btn.done .num span { display: none; }
+.step-btn.locked { opacity: 0.4; cursor: not-allowed; }
+
+/* ========== Generic card ========== */
+.card {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.section-title {
+  font-size: 22px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+/* ========== Flashcard ========== */
+.fc-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.fc-bar {
+  flex: 1;
+  height: 10px;
+  background: var(--bg-3);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  margin: 0 12px;
+  overflow: hidden;
+}
+.fc-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary), var(--green));
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.flashcard-wrap {
+  perspective: 1200px;
+  height: 360px;
+  margin: 18px 0;
+}
+.flashcard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+
+.fc-face {
+  position: absolute;
+  inset: 0;
+  border: 4px solid var(--ink);
+  border-radius: 24px;
+  padding: 24px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.fc-front {
+  background: linear-gradient(135deg, #fff5b8, var(--accent));
+}
+.fc-back {
+  background: linear-gradient(135deg, #d4f5f3, var(--secondary));
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  text-align: left;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+.fc-emoji { font-size: 84px; margin-bottom: 6px; line-height: 1; }
+.fc-word {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.fc-pos {
+  display: inline-block;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+.fc-listen-btn {
+  margin-top: 14px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Nunito', sans-serif;
+}
+.fc-listen-btn:hover { background: var(--primary); }
+.fc-listen-btn.playing { background: var(--primary); animation: pulse 1s infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.fc-back .word-back {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.fc-back .ipa {
+  font-family: 'Nunito', sans-serif;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+.fc-back .row {
+  background: rgba(255, 250, 242, 0.7);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.fc-back .row b {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary-dark);
+  margin-bottom: 2px;
+}
+
+.fc-tip {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.fc-tip kbd {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  padding: 1px 8px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 2px 0 var(--ink);
+}
+
+.fc-rate {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+.rate-btn {
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 12px 6px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.rate-btn:hover { transform: translateY(-2px); }
+.rate-btn:active { transform: translateY(4px); box-shadow: var(--shadow-pressed); }
+.rate-btn .small { font-size: 11px; font-weight: 700; opacity: 0.7; font-family: 'Nunito', sans-serif; }
+.rate-again { background: #ffc4c4; }
+.rate-good   { background: #ffe599; }
+.rate-easy   { background: #b7e9b1; }
+
+/* ========== Shadowing ========== */
+.shadow-card {
+  text-align: center;
+  padding: 28px 20px;
+}
+.shadow-emoji { font-size: 70px; margin-bottom: 6px; }
+.shadow-word { font-family: 'Fredoka'; font-size: 36px; font-weight: 600; }
+.shadow-ipa { color: var(--ink-soft); font-style: italic; margin: 6px 0 16px; font-size: 16px; }
+.shadow-example {
+  background: var(--bg-2);
+  border: 3px dashed var(--ink);
+  border-radius: 16px;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 12px auto 18px;
+  max-width: 520px;
+  font-style: italic;
+}
+.shadow-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.btn {
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(4px); box-shadow: var(--shadow-pressed); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+.btn-primary { background: var(--primary); color: var(--paper); }
+.btn-secondary { background: var(--secondary); color: var(--paper); }
+.btn-accent { background: var(--accent); color: var(--ink); }
+.btn-ghost { background: var(--paper); color: var(--ink); }
+.btn-record { background: var(--red); color: var(--paper); }
+.btn-record.recording { animation: pulse 1.2s infinite; background: #ff1744; }
+
+.speed-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  align-items: center;
+}
+.speed-btn {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+}
+.speed-btn.active { background: var(--ink); color: var(--paper); }
+
+.shadow-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  gap: 10px;
+}
+.shadow-counter {
+  font-weight: 800;
+  font-size: 14px;
+  background: var(--bg-3);
+  padding: 6px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+}
+
+.recorded-playback {
+  margin-top: 12px;
+  background: var(--bg-2);
+  border: 2px dashed var(--ink);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 13px;
+  display: none;
+}
+.recorded-playback.visible { display: block; }
+.recorded-playback audio { width: 100%; margin-top: 6px; }
+
+/* ========== Dictation ========== */
+.dict-prompt {
+  text-align: center;
+  background: var(--bg-2);
+  border: 3px dashed var(--ink);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.dict-prompt button {
+  background: var(--primary);
+  color: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.dict-prompt button:active { transform: translateY(4px); box-shadow: var(--shadow-pressed); }
+.dict-prompt small { display: block; margin-top: 8px; color: var(--ink-soft); font-size: 13px; }
+
+.dict-input-wrap { position: relative; margin-bottom: 12px; }
+.dict-input {
+  width: 100%;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 28px;
+  text-align: center;
+  padding: 18px;
+  border: 4px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  outline: none;
+  letter-spacing: 0.04em;
+}
+.dict-input:focus { border-color: var(--primary); }
+.dict-input.correct { background: #e6fbe2; border-color: var(--green); }
+.dict-input.wrong { background: #ffe6ec; border-color: var(--red); animation: shake 0.4s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.dict-feedback {
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  min-height: 24px;
+  margin-bottom: 10px;
+}
+.dict-feedback.correct { color: var(--green); }
+.dict-feedback.wrong { color: var(--red); }
+.dict-feedback.correct::before { content: '🎉 '; }
+.dict-feedback.wrong::before { content: '🤔 '; }
+
+.dict-hint-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.hint-blanks {
+  font-family: 'Fredoka', sans-serif;
+  letter-spacing: 0.5em;
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--ink-soft);
+}
+
+.dict-counter {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--ink-soft);
+}
+
+/* ========== Quiz ========== */
+.quiz-progress {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.quiz-bar {
+  height: 10px;
+  background: var(--bg-3);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.quiz-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  width: 0%;
+  transition: width 0.4s;
+}
+.quiz-question {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.quiz-question .word {
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  padding: 2px 10px;
+  display: inline-block;
+}
+.quiz-emoji { text-align: center; font-size: 70px; margin-bottom: 4px; }
+.quiz-listen { display: block; margin: 0 auto 14px; }
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.quiz-option {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 14px;
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-option:hover:not(:disabled) { transform: translateY(-2px); background: #fff8e0; }
+.quiz-option:disabled { cursor: default; }
+.quiz-option .letter {
+  background: var(--ink);
+  color: var(--paper);
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: 8px;
+  font-weight: 800;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.quiz-option.correct {
+  background: #d4f5d4;
+  border-color: var(--green);
+}
+.quiz-option.correct .letter { background: var(--green); }
+.quiz-option.wrong {
+  background: #ffd6dd;
+  border-color: var(--red);
+}
+.quiz-option.wrong .letter { background: var(--red); }
+
+.quiz-explain {
+  background: var(--bg-2);
+  border: 2px dashed var(--ink);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  margin-top: 8px;
+  display: none;
+}
+.quiz-explain.visible { display: block; animation: slideIn 0.3s; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.quiz-explain b { color: var(--primary-dark); }
+
+.quiz-next {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+/* ========== Completion screens ========== */
+.complete-card {
+  text-align: center;
+  padding: 30px 20px;
+}
+.complete-card .big-emoji { font-size: 90px; margin-bottom: 6px; animation: pop 0.6s ease-out; }
+@keyframes pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.complete-card h2 { font-size: 30px; margin-bottom: 6px; }
+.complete-card p { color: var(--ink-soft); margin-bottom: 18px; }
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto 20px;
+}
+.score-cell {
+  background: var(--bg-2);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 12px 6px;
+  box-shadow: var(--shadow);
+}
+.score-cell .num {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+.score-cell .label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 999;
+  animation: fall 2.6s linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ========== Hidden / Utility ========== */
+.hidden { display: none !important; }
+
+/* ========== Responsive ========== */
+@media (max-width: 560px) {
+  .app { padding: 16px 10px 60px; }
+  .brand h1 { font-size: 22px; }
+  .step-btn { font-size: 11px; padding: 8px 4px; }
+  .step-btn .icon { font-size: 18px; }
+  .step-btn .num { width: 14px; height: 14px; font-size: 9px; }
+  .quiz-options { grid-template-columns: 1fr; }
+  .fc-emoji { font-size: 64px; }
+  .fc-word { font-size: 32px; }
+  .flashcard-wrap { height: 380px; }
+  .shadow-word { font-size: 28px; }
+  .dict-input { font-size: 22px; }
+  .score-grid { grid-template-columns: repeat(3, 1fr); }
+  .fc-rate { gap: 6px; }
+  .rate-btn { padding: 10px 4px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">🏠</div>
+      <h1>My Cozy House
+        <small>Learn vocabulary about your home!</small>
+      </h1>
+    </div>
+    <div class="streak" id="streakBox">⭐ <span id="streakNum">0</span> stars</div>
+  </header>
+
+  <nav class="steps" id="stepNav">
+    <button class="step-btn active" data-step="flashcard">
+      <span class="num"><span>1</span></span>
+      <span class="icon">🎴</span>
+      <span>Flashcard</span>
+    </button>
+    <button class="step-btn locked" data-step="shadowing" disabled>
+      <span class="num"><span>2</span></span>
+      <span class="icon">🎤</span>
+      <span>Shadowing</span>
+    </button>
+    <button class="step-btn locked" data-step="dictation" disabled>
+      <span class="num"><span>3</span></span>
+      <span class="icon">✏️</span>
+      <span>Dictation</span>
+    </button>
+    <button class="step-btn locked" data-step="quiz" disabled>
+      <span class="num"><span>4</span></span>
+      <span class="icon">🏆</span>
+      <span>Quiz</span>
+    </button>
+  </nav>
+
+  <!-- ============ STEP 1: FLASHCARD ============ -->
+  <section id="step-flashcard" class="step-content">
+    <div class="card">
+      <h2 class="section-title">🎴 Step 1 — Flashcards</h2>
+      <p class="section-sub">Click the card to flip. Listen and rate how well you know each word.</p>
+
+      <div class="fc-progress">
+        <span>📚 <span id="fcRemaining">0</span> left</span>
+        <div class="fc-bar"><div class="fc-bar-fill" id="fcBarFill"></div></div>
+        <span>✅ <span id="fcLearned">0</span> learned</span>
+      </div>
+
+      <div class="flashcard-wrap" id="flashcardWrap">
+        <div class="flashcard" id="flashcard">
+          <div class="fc-face fc-front">
+            <div class="fc-emoji" id="fcEmoji">🏠</div>
+            <div class="fc-word" id="fcWord">house</div>
+            <div class="fc-pos" id="fcPos">noun</div>
+            <button class="fc-listen-btn" id="fcListen">🔊 Listen</button>
+          </div>
+          <div class="fc-face fc-back">
+            <div class="word-back" id="fcBackWord">house</div>
+            <div class="ipa" id="fcIpa">/haʊs/</div>
+            <div class="row"><b>📖 Meaning</b><span id="fcMeaning"></span></div>
+            <div class="row"><b>💬 Example</b><span id="fcExample"></span></div>
+            <div class="row"><b>🔁 Synonym</b><span id="fcSynonym"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-tip">Tap the card to flip · Press <kbd>Space</kbd> to flip · <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> to rate</div>
+
+      <div class="fc-rate" id="fcRate">
+        <button class="rate-btn rate-again" data-rate="again">😟 Again<span class="small">~1 min</span></button>
+        <button class="rate-btn rate-good" data-rate="good">🙂 Good<span class="small">~10 min</span></button>
+        <button class="rate-btn rate-easy" data-rate="easy">😎 Easy<span class="small">Done!</span></button>
+      </div>
+    </div>
+
+    <div class="card complete-card hidden" id="fcComplete">
+      <div class="big-emoji">🎉</div>
+      <h2>Flashcards finished!</h2>
+      <p>Great job! Now let's practice saying these words out loud.</p>
+      <button class="btn btn-primary" onclick="goToStep('shadowing')">🎤 Go to Shadowing →</button>
+    </div>
+  </section>
+
+  <!-- ============ STEP 2: SHADOWING ============ -->
+  <section id="step-shadowing" class="step-content hidden">
+    <div class="card">
+      <h2 class="section-title">🎤 Step 2 — Shadowing</h2>
+      <p class="section-sub">Listen carefully, then repeat after the speaker. Try to copy the sound!</p>
+
+      <div class="shadow-card" id="shadowCard">
+        <div class="shadow-emoji" id="shEmoji">🏠</div>
+        <div class="shadow-word" id="shWord">house</div>
+        <div class="shadow-ipa" id="shIpa">/haʊs/</div>
+        <div class="shadow-example" id="shExample">"My house is warm and cozy."</div>
+
+        <div class="speed-row">
+          Speed:
+          <button class="speed-btn" data-speed="0.6">🐢 Slow</button>
+          <button class="speed-btn active" data-speed="0.85">🚶 Normal</button>
+          <button class="speed-btn" data-speed="1.0">🏃 Fast</button>
+        </div>
+
+        <div class="shadow-controls">
+          <button class="btn btn-secondary" id="shListenWord">🔊 Word</button>
+          <button class="btn btn-accent" id="shListenSentence">📣 Sentence</button>
+          <button class="btn btn-record" id="shRecord">🎙️ Record me</button>
+        </div>
+
+        <div class="recorded-playback" id="shPlayback">
+          <b>🎧 Your recording:</b>
+          <audio id="shAudio" controls></audio>
+        </div>
+      </div>
+
+      <div class="shadow-nav">
+        <button class="btn btn-ghost" id="shPrev">← Prev</button>
+        <span class="shadow-counter"><span id="shCounter">1</span> / <span id="shTotal">15</span></span>
+        <button class="btn btn-primary" id="shNext">Next →</button>
+      </div>
+    </div>
+
+    <div class="card complete-card hidden" id="shComplete">
+      <div class="big-emoji">🌟</div>
+      <h2>Awesome shadowing!</h2>
+      <p>Your pronunciation is getting better. Time to test your spelling!</p>
+      <button class="btn btn-primary" onclick="goToStep('dictation')">✏️ Go to Dictation →</button>
+    </div>
+  </section>
+
+  <!-- ============ STEP 3: DICTATION ============ -->
+  <section id="step-dictation" class="step-content hidden">
+    <div class="card">
+      <h2 class="section-title">✏️ Step 3 — Dictation</h2>
+      <p class="section-sub">Listen to the word and type what you hear. Spelling counts!</p>
+
+      <div class="dict-counter">Word <span id="dictNum">1</span> of <span id="dictTotal">15</span> · ❤️ <span id="dictLives">3</span> lives</div>
+
+      <div class="dict-prompt">
+        <button id="dictPlay">🔊 Play the word</button>
+        <small>Click to hear the word · You can listen up to 3 times</small>
+      </div>
+
+      <div class="hint-blanks" id="hintBlanks">_ _ _ _ _</div>
+
+      <div class="dict-input-wrap">
+        <input type="text" class="dict-input" id="dictInput" placeholder="Type here..." autocomplete="off" spellcheck="false" />
+      </div>
+
+      <div class="dict-feedback" id="dictFeedback">&nbsp;</div>
+
+      <div class="dict-hint-row">
+        <button class="btn btn-ghost" id="dictHint">💡 Show first letter</button>
+        <button class="btn btn-secondary" id="dictReplay">🔁 Replay</button>
+        <button class="btn btn-primary" id="dictCheck">✅ Check</button>
+      </div>
+    </div>
+
+    <div class="card complete-card hidden" id="dictComplete">
+      <div class="big-emoji">📝</div>
+      <h2>Great spelling!</h2>
+      <p id="dictResult">You spelled all words correctly!</p>
+      <button class="btn btn-primary" onclick="goToStep('quiz')">🏆 Go to Quiz →</button>
+    </div>
+  </section>
+
+  <!-- ============ STEP 4: QUIZ ============ -->
+  <section id="step-quiz" class="step-content hidden">
+    <div class="card">
+      <h2 class="section-title">🏆 Step 4 — Quiz</h2>
+      <p class="section-sub">Mix of meaning, listening and example questions. Good luck!</p>
+
+      <div class="quiz-progress">
+        <span>Question <span id="qNum">1</span> / <span id="qTotal">10</span></span>
+        <span>⭐ Score: <span id="qScore">0</span></span>
+      </div>
+      <div class="quiz-bar"><div class="quiz-bar-fill" id="qBarFill"></div></div>
+
+      <div id="qStage"></div>
+
+      <div class="quiz-next hidden" id="qNextWrap">
+        <button class="btn btn-primary" id="qNextBtn">Next →</button>
+      </div>
+    </div>
+
+    <div class="card complete-card hidden" id="qComplete">
+      <div class="big-emoji" id="qBigEmoji">🏆</div>
+      <h2 id="qTitle">All done!</h2>
+      <p id="qSubtitle">Here's how you did:</p>
+      <div class="score-grid">
+        <div class="score-cell"><div class="num" id="qFinalScore">0</div><div class="label">Score</div></div>
+        <div class="score-cell"><div class="num" id="qCorrect">0</div><div class="label">Correct</div></div>
+        <div class="score-cell"><div class="num" id="qPercent">0%</div><div class="label">Accuracy</div></div>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-accent" id="qRetry">🔁 Retry wrong only</button>
+        <button class="btn btn-primary" id="qRestart">🌟 Start over</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ============================================================
+   VOCABULARY DATA — Topic: HOUSE (15 words for kids G1–G7)
+============================================================ */
+const VOCAB = [
+  { word: "house",      ipa: "/haʊs/",        pos: "noun",      emoji: "🏠", meaning: "Một nơi để ở, có tường và mái che.", example: "My house is small but very cozy.",        synonym: "home" },
+  { word: "kitchen",    ipa: "/ˈkɪtʃ.ɪn/",    pos: "noun",      emoji: "🍳", meaning: "Phòng để nấu ăn.",                  example: "Mom is cooking in the kitchen.",         synonym: "cookhouse" },
+  { word: "bedroom",    ipa: "/ˈbed.ruːm/",   pos: "noun",      emoji: "🛏️", meaning: "Phòng để ngủ.",                    example: "I read books in my bedroom.",            synonym: "sleeping room" },
+  { word: "bathroom",   ipa: "/ˈbɑːθ.ruːm/",  pos: "noun",      emoji: "🛁", meaning: "Phòng để tắm và rửa.",              example: "The bathroom has a big mirror.",         synonym: "washroom" },
+  { word: "living room",ipa: "/ˈlɪv.ɪŋ ruːm/",pos: "noun",     emoji: "🛋️", meaning: "Phòng khách, nơi gia đình ngồi chơi.", example: "We watch TV in the living room.",     synonym: "lounge" },
+  { word: "garden",     ipa: "/ˈɡɑːr.dən/",   pos: "noun",      emoji: "🌷", meaning: "Khu vườn, nơi trồng cây và hoa.",   example: "Grandpa plants flowers in the garden.",  synonym: "yard" },
+  { word: "window",     ipa: "/ˈwɪn.doʊ/",    pos: "noun",      emoji: "🪟", meaning: "Cửa sổ, nơi nhìn ra ngoài.",        example: "Open the window for fresh air.",         synonym: "pane" },
+  { word: "door",       ipa: "/dɔːr/",        pos: "noun",      emoji: "🚪", meaning: "Cửa ra vào.",                       example: "Please close the door behind you.",      synonym: "entrance" },
+  { word: "roof",       ipa: "/ruːf/",        pos: "noun",      emoji: "🏛️", meaning: "Mái nhà, phần trên cùng của ngôi nhà.", example: "The cat is sleeping on the roof.",   synonym: "rooftop" },
+  { word: "sofa",       ipa: "/ˈsoʊ.fə/",     pos: "noun",      emoji: "🛋️", meaning: "Ghế dài để ngồi nhiều người.",      example: "Sit on the sofa and relax.",             synonym: "couch" },
+  { word: "table",      ipa: "/ˈteɪ.bəl/",    pos: "noun",      emoji: "🪑", meaning: "Cái bàn, nơi để đồ hoặc ăn cơm.",   example: "Put your books on the table.",           synonym: "desk" },
+  { word: "lamp",       ipa: "/læmp/",        pos: "noun",      emoji: "💡", meaning: "Cái đèn dùng để chiếu sáng.",       example: "Turn on the lamp, it's dark.",           synonym: "light" },
+  { word: "stairs",     ipa: "/sterz/",       pos: "noun",      emoji: "🪜", meaning: "Cầu thang để đi lên xuống.",        example: "Be careful on the stairs.",              synonym: "steps" },
+  { word: "garage",     ipa: "/ɡəˈrɑːʒ/",     pos: "noun",      emoji: "🚗", meaning: "Nơi để xe hơi.",                    example: "Dad parks the car in the garage.",       synonym: "carport" },
+  { word: "fence",      ipa: "/fens/",        pos: "noun",      emoji: "🪵", meaning: "Hàng rào quanh nhà.",                example: "There is a wooden fence around the house.", synonym: "barrier" }
+];
+
+/* ============================================================
+   STATE
+============================================================ */
+const STORE_KEY = 'house_vocab_state_v1';
+const state = loadState() || {
+  currentStep: 'flashcard',
+  stepsCompleted: { flashcard: false, shadowing: false, dictation: false, quiz: false },
+  fcDeck: VOCAB.map((_, i) => ({ idx: i, box: 0, dueAt: 0 })), // SM-2-lite
+  fcLearned: 0,
+  shIndex: 0,
+  shVisited: new Array(VOCAB.length).fill(false),
+  dictIndex: 0,
+  dictLives: 3,
+  dictMistakes: 0,
+  dictPlayCount: 0,
+  dictHintShown: false,
+  qIndex: 0,
+  qScore: 0,
+  qWrong: [],
+  qSet: [], // generated questions
+  qRetryMode: false,
+  stars: 0,
+  shSpeed: 0.85
+};
+
+function saveState() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+
+/* ============================================================
+   AUDIO — Web Speech API
+============================================================ */
+let voicesLoaded = false;
+let preferredVoice = null;
+function loadVoices() {
+  const voices = speechSynthesis.getVoices();
+  if (voices.length === 0) return;
+  voicesLoaded = true;
+  // Prefer female English voice for clarity for kids
+  preferredVoice =
+    voices.find(v => /en-US/i.test(v.lang) && /female|samantha|zira|google us english/i.test(v.name)) ||
+    voices.find(v => /en-US/i.test(v.lang)) ||
+    voices.find(v => /en-GB/i.test(v.lang)) ||
+    voices.find(v => /en/i.test(v.lang)) ||
+    voices[0];
+}
+if (typeof speechSynthesis !== 'undefined') {
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+function speak(text, opts = {}) {
+  if (!('speechSynthesis' in window)) {
+    alert("Trình duyệt của bạn chưa hỗ trợ phát âm. Hãy thử Chrome hoặc Edge nhé!");
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    if (preferredVoice) u.voice = preferredVoice;
+    u.lang = 'en-US';
+    u.rate = opts.rate || 0.9;
+    u.pitch = opts.pitch || 1.05;
+    u.volume = 1;
+    u.onend = resolve;
+    u.onerror = resolve;
+    speechSynthesis.speak(u);
+  });
+}
+
+/* ============================================================
+   STEP NAVIGATION
+============================================================ */
+const stepBtns = document.querySelectorAll('.step-btn');
+stepBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.classList.contains('locked')) return;
+    goToStep(btn.dataset.step);
+  });
+});
+
+function goToStep(step) {
+  state.currentStep = step;
+  document.querySelectorAll('.step-content').forEach(s => s.classList.add('hidden'));
+  document.getElementById('step-' + step).classList.remove('hidden');
+  stepBtns.forEach(b => {
+    b.classList.toggle('active', b.dataset.step === step);
+  });
+  saveState();
+  // Initialize step
+  if (step === 'flashcard') initFlashcard();
+  if (step === 'shadowing') initShadowing();
+  if (step === 'dictation') initDictation();
+  if (step === 'quiz') initQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function unlockStep(step) {
+  const btn = document.querySelector(`.step-btn[data-step="${step}"]`);
+  if (btn) {
+    btn.classList.remove('locked');
+    btn.disabled = false;
+  }
+}
+function markStepDone(step) {
+  state.stepsCompleted[step] = true;
+  state.stars++;
+  document.getElementById('streakNum').textContent = state.stars;
+  const btn = document.querySelector(`.step-btn[data-step="${step}"]`);
+  if (btn) btn.classList.add('done');
+  saveState();
+}
+
+/* ============================================================
+   STEP 1 — FLASHCARDS (Spaced Repetition Lite)
+   Boxes: 0 = new, 1 = learning, 2 = familiar, 3 = mastered
+   Rate "again" → box 0, due now+1
+   Rate "good"  → box+1, due now+10 (or +60 if higher)
+   Rate "easy"  → box=3 (mastered)
+============================================================ */
+const flashcardEl = document.getElementById('flashcard');
+const fcWord = document.getElementById('fcWord');
+const fcEmoji = document.getElementById('fcEmoji');
+const fcPos = document.getElementById('fcPos');
+const fcBackWord = document.getElementById('fcBackWord');
+const fcIpa = document.getElementById('fcIpa');
+const fcMeaning = document.getElementById('fcMeaning');
+const fcExample = document.getElementById('fcExample');
+const fcSynonym = document.getElementById('fcSynonym');
+const fcRemaining = document.getElementById('fcRemaining');
+const fcLearnedEl = document.getElementById('fcLearned');
+const fcBarFill = document.getElementById('fcBarFill');
+const fcListenBtn = document.getElementById('fcListen');
+const fcComplete = document.getElementById('fcComplete');
+
+let currentFcIdx = -1;
+
+function pickNextCard() {
+  // Prefer cards in box < 3, sorted by box asc, then dueAt asc
+  const now = Date.now();
+  const candidates = state.fcDeck.filter(c => c.box < 3 && (c.dueAt || 0) <= now);
+  if (candidates.length === 0) {
+    // Try due-soon ones
+    const soon = state.fcDeck.filter(c => c.box < 3).sort((a, b) => a.dueAt - b.dueAt);
+    if (soon.length === 0) return null;
+    return soon[0];
+  }
+  candidates.sort((a, b) => a.box - b.box || a.dueAt - b.dueAt);
+  return candidates[0];
+}
+
+function renderCurrentCard() {
+  const card = pickNextCard();
+  if (!card) {
+    // Done
+    document.getElementById('flashcard').parentElement.parentElement.classList.add('hidden');
+    fcComplete.classList.remove('hidden');
+    if (!state.stepsCompleted.flashcard) {
+      markStepDone('flashcard');
+      unlockStep('shadowing');
+      celebrate();
+    }
+    return;
+  }
+  currentFcIdx = card.idx;
+  const v = VOCAB[card.idx];
+  flashcardEl.classList.remove('flipped');
+  fcWord.textContent = v.word;
+  fcEmoji.textContent = v.emoji;
+  fcPos.textContent = v.pos;
+  fcBackWord.textContent = v.word;
+  fcIpa.textContent = v.ipa;
+  fcMeaning.textContent = v.meaning;
+  fcExample.textContent = v.example;
+  fcSynonym.textContent = v.synonym;
+  updateFcProgress();
+}
+
+function updateFcProgress() {
+  const total = VOCAB.length;
+  const learned = state.fcDeck.filter(c => c.box >= 3).length;
+  const remaining = total - learned;
+  state.fcLearned = learned;
+  fcLearnedEl.textContent = learned;
+  fcRemaining.textContent = remaining;
+  fcBarFill.style.width = Math.round((learned / total) * 100) + '%';
+}
+
+function rateCard(rating) {
+  const card = state.fcDeck.find(c => c.idx === currentFcIdx);
+  if (!card) return;
+  const now = Date.now();
+  if (rating === 'again') {
+    card.box = 0;
+    card.dueAt = now + 30 * 1000; // 30 sec
+  } else if (rating === 'good') {
+    card.box = Math.min(3, card.box + 1);
+    card.dueAt = now + (card.box >= 2 ? 60 * 1000 : 10 * 1000);
+  } else if (rating === 'easy') {
+    card.box = 3;
+    card.dueAt = now + 365 * 24 * 60 * 60 * 1000; // far future
+  }
+  saveState();
+  renderCurrentCard();
+}
+
+flashcardEl.addEventListener('click', (e) => {
+  // Don't flip when clicking listen button
+  if (e.target.closest('.fc-listen-btn')) return;
+  flashcardEl.classList.toggle('flipped');
+});
+
+fcListenBtn.addEventListener('click', async (e) => {
+  e.stopPropagation();
+  fcListenBtn.classList.add('playing');
+  await speak(VOCAB[currentFcIdx].word, { rate: 0.85 });
+  fcListenBtn.classList.remove('playing');
+});
+
+document.querySelectorAll('#fcRate .rate-btn').forEach(btn => {
+  btn.addEventListener('click', () => rateCard(btn.dataset.rate));
+});
+
+// Keyboard shortcuts for flashcard step
+document.addEventListener('keydown', (e) => {
+  if (state.currentStep !== 'flashcard') return;
+  if (document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if (e.code === 'Space') { e.preventDefault(); flashcardEl.classList.toggle('flipped'); }
+  if (e.key === '1') rateCard('again');
+  if (e.key === '2') rateCard('good');
+  if (e.key === '3') rateCard('easy');
+});
+
+function initFlashcard() {
+  // If everything mastered already, show complete view
+  const allMastered = state.fcDeck.every(c => c.box >= 3);
+  if (allMastered) {
+    document.getElementById('flashcard').parentElement.parentElement.classList.add('hidden');
+    fcComplete.classList.remove('hidden');
+  } else {
+    document.getElementById('flashcard').parentElement.parentElement.classList.remove('hidden');
+    fcComplete.classList.add('hidden');
+    renderCurrentCard();
+  }
+}
+
+/* ============================================================
+   STEP 2 — SHADOWING
+============================================================ */
+const shEmoji = document.getElementById('shEmoji');
+const shWord = document.getElementById('shWord');
+const shIpa = document.getElementById('shIpa');
+const shExample = document.getElementById('shExample');
+const shCounter = document.getElementById('shCounter');
+const shTotal = document.getElementById('shTotal');
+const shListenWord = document.getElementById('shListenWord');
+const shListenSentence = document.getElementById('shListenSentence');
+const shRecord = document.getElementById('shRecord');
+const shPrev = document.getElementById('shPrev');
+const shNext = document.getElementById('shNext');
+const shAudio = document.getElementById('shAudio');
+const shPlayback = document.getElementById('shPlayback');
+const shCard = document.getElementById('shadowCard');
+const shComplete = document.getElementById('shComplete');
+
+shTotal.textContent = VOCAB.length;
+
+let mediaRecorder = null;
+let audioChunks = [];
+let audioStream = null;
+
+function renderShadowing() {
+  const v = VOCAB[state.shIndex];
+  shEmoji.textContent = v.emoji;
+  shWord.textContent = v.word;
+  shIpa.textContent = v.ipa;
+  shExample.textContent = `"${v.example}"`;
+  shCounter.textContent = state.shIndex + 1;
+  shPrev.disabled = state.shIndex === 0;
+  shPlayback.classList.remove('visible');
+  saveState();
+}
+
+shListenWord.addEventListener('click', () => speak(VOCAB[state.shIndex].word, { rate: state.shSpeed }));
+shListenSentence.addEventListener('click', () => speak(VOCAB[state.shIndex].example, { rate: state.shSpeed }));
+
+document.querySelectorAll('.speed-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.shSpeed = parseFloat(btn.dataset.speed);
+    saveState();
+  });
+});
+
+shRecord.addEventListener('click', async () => {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert("Trình duyệt không hỗ trợ ghi âm. Hãy dùng Chrome trên máy tính nhé!");
+    return;
+  }
+  if (mediaRecorder && mediaRecorder.state === 'recording') {
+    mediaRecorder.stop();
+    return;
+  }
+  try {
+    audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(audioStream);
+    audioChunks = [];
+    mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(audioChunks, { type: 'audio/webm' });
+      shAudio.src = URL.createObjectURL(blob);
+      shPlayback.classList.add('visible');
+      shRecord.classList.remove('recording');
+      shRecord.innerHTML = '🎙️ Record again';
+      if (audioStream) audioStream.getTracks().forEach(t => t.stop());
+    };
+    mediaRecorder.start();
+    shRecord.classList.add('recording');
+    shRecord.innerHTML = '⏹ Stop';
+    // Auto-stop after 8 sec safety
+    setTimeout(() => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+    }, 8000);
+  } catch (err) {
+    alert("Không thể truy cập microphone. Hãy cho phép trình duyệt sử dụng micro nhé!");
+  }
+});
+
+shPrev.addEventListener('click', () => {
+  if (state.shIndex > 0) { state.shIndex--; renderShadowing(); }
+});
+
+shNext.addEventListener('click', () => {
+  state.shVisited[state.shIndex] = true;
+  if (state.shIndex < VOCAB.length - 1) {
+    state.shIndex++;
+    renderShadowing();
+  } else {
+    // Complete
+    shCard.parentElement.classList.add('hidden');
+    shComplete.classList.remove('hidden');
+    if (!state.stepsCompleted.shadowing) {
+      markStepDone('shadowing');
+      unlockStep('dictation');
+      celebrate();
+    }
+  }
+});
+
+function initShadowing() {
+  if (state.shVisited.every(v => v)) {
+    shCard.parentElement.classList.add('hidden');
+    shComplete.classList.remove('hidden');
+  } else {
+    shCard.parentElement.classList.remove('hidden');
+    shComplete.classList.add('hidden');
+    renderShadowing();
+  }
+}
+
+/* ============================================================
+   STEP 3 — DICTATION
+============================================================ */
+const dictNum = document.getElementById('dictNum');
+const dictTotal = document.getElementById('dictTotal');
+const dictLivesEl = document.getElementById('dictLives');
+const dictPlay = document.getElementById('dictPlay');
+const dictInput = document.getElementById('dictInput');
+const dictFeedback = document.getElementById('dictFeedback');
+const dictHintBtn = document.getElementById('dictHint');
+const dictReplay = document.getElementById('dictReplay');
+const dictCheckBtn = document.getElementById('dictCheck');
+const hintBlanks = document.getElementById('hintBlanks');
+const dictComplete = document.getElementById('dictComplete');
+const dictResult = document.getElementById('dictResult');
+
+dictTotal.textContent = VOCAB.length;
+
+function renderBlanks(word, hintShown) {
+  return word.split('').map((ch, i) => {
+    if (ch === ' ') return '·';
+    if (hintShown && i === 0) return ch;
+    return '_';
+  }).join(' ');
+}
+
+function renderDictation() {
+  const v = VOCAB[state.dictIndex];
+  dictNum.textContent = state.dictIndex + 1;
+  dictLivesEl.textContent = state.dictLives;
+  dictInput.value = '';
+  dictInput.classList.remove('correct', 'wrong');
+  dictFeedback.textContent = '\u00A0';
+  dictFeedback.className = 'dict-feedback';
+  state.dictPlayCount = 0;
+  state.dictHintShown = false;
+  hintBlanks.textContent = renderBlanks(v.word, false);
+  dictInput.focus();
+  saveState();
+}
+
+async function playDictWord(force = false) {
+  const v = VOCAB[state.dictIndex];
+  if (!force && state.dictPlayCount >= 3) {
+    dictFeedback.textContent = "Bạn chỉ có thể nghe 3 lần. Cố gắng nhớ nhé!";
+    dictFeedback.className = 'dict-feedback wrong';
+    return;
+  }
+  state.dictPlayCount++;
+  await speak(v.word, { rate: 0.8 });
+}
+
+dictPlay.addEventListener('click', () => playDictWord());
+dictReplay.addEventListener('click', () => playDictWord());
+
+dictHintBtn.addEventListener('click', () => {
+  state.dictHintShown = true;
+  hintBlanks.textContent = renderBlanks(VOCAB[state.dictIndex].word, true);
+});
+
+function checkDictation() {
+  const v = VOCAB[state.dictIndex];
+  const guess = dictInput.value.trim().toLowerCase();
+  const target = v.word.toLowerCase();
+  if (!guess) {
+    dictFeedback.textContent = "Hãy gõ từ vào ô bên trên nhé!";
+    dictFeedback.className = 'dict-feedback wrong';
+    return;
+  }
+  if (guess === target) {
+    dictInput.classList.add('correct');
+    dictFeedback.textContent = `Chính xác! "${v.word}" 🎉`;
+    dictFeedback.className = 'dict-feedback correct';
+    setTimeout(() => {
+      if (state.dictIndex < VOCAB.length - 1) {
+        state.dictIndex++;
+        renderDictation();
+      } else {
+        // done
+        document.querySelector('#step-dictation .card').classList.add('hidden');
+        const total = VOCAB.length;
+        const got = total - state.dictMistakes;
+        dictResult.textContent = `You got ${got} out of ${total} correct!`;
+        dictComplete.classList.remove('hidden');
+        if (!state.stepsCompleted.dictation) {
+          markStepDone('dictation');
+          unlockStep('quiz');
+          celebrate();
+        }
+      }
+    }, 900);
+  } else {
+    dictInput.classList.add('wrong');
+    state.dictLives--;
+    dictLivesEl.textContent = Math.max(0, state.dictLives);
+    if (state.dictLives <= 0) {
+      // reveal answer and move on
+      state.dictMistakes++;
+      dictFeedback.textContent = `Đáp án: "${v.word}". Sang câu tiếp theo!`;
+      dictFeedback.className = 'dict-feedback wrong';
+      setTimeout(() => {
+        state.dictLives = 3;
+        if (state.dictIndex < VOCAB.length - 1) {
+          state.dictIndex++;
+          renderDictation();
+        } else {
+          document.querySelector('#step-dictation .card').classList.add('hidden');
+          const total = VOCAB.length;
+          const got = total - state.dictMistakes;
+          dictResult.textContent = `You got ${got} out of ${total} correct!`;
+          dictComplete.classList.remove('hidden');
+          if (!state.stepsCompleted.dictation) {
+            markStepDone('dictation');
+            unlockStep('quiz');
+            celebrate();
+          }
+        }
+      }, 1800);
+    } else {
+      dictFeedback.textContent = `Chưa đúng. Còn ${state.dictLives} lần thử. Nghe lại nhé!`;
+      dictFeedback.className = 'dict-feedback wrong';
+      setTimeout(() => dictInput.classList.remove('wrong'), 600);
+    }
+  }
+  saveState();
+}
+
+dictCheckBtn.addEventListener('click', checkDictation);
+dictInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') checkDictation();
+});
+
+function initDictation() {
+  // If already finished, show complete view
+  if (state.dictIndex >= VOCAB.length) {
+    document.querySelector('#step-dictation .card').classList.add('hidden');
+    dictComplete.classList.remove('hidden');
+  } else {
+    document.querySelector('#step-dictation .card').classList.remove('hidden');
+    dictComplete.classList.add('hidden');
+    renderDictation();
+    setTimeout(() => playDictWord(), 400);
+  }
+}
+
+/* ============================================================
+   STEP 4 — QUIZ
+   Mix of question types:
+   - listen2word: Hear word → pick the right written word
+   - meaning2word: See VN meaning → pick English word
+   - word2meaning: See English word → pick VN meaning
+   - emoji2word: See emoji → pick word
+   - cloze: Fill the blank in the example sentence
+============================================================ */
+const qNum = document.getElementById('qNum');
+const qTotal = document.getElementById('qTotal');
+const qScoreEl = document.getElementById('qScore');
+const qBarFill = document.getElementById('qBarFill');
+const qStage = document.getElementById('qStage');
+const qNextWrap = document.getElementById('qNextWrap');
+const qNextBtn = document.getElementById('qNextBtn');
+const qComplete = document.getElementById('qComplete');
+const qFinalScore = document.getElementById('qFinalScore');
+const qCorrectEl = document.getElementById('qCorrect');
+const qPercent = document.getElementById('qPercent');
+const qBigEmoji = document.getElementById('qBigEmoji');
+const qTitle = document.getElementById('qTitle');
+const qSubtitle = document.getElementById('qSubtitle');
+const qRetryBtn = document.getElementById('qRetry');
+const qRestartBtn = document.getElementById('qRestart');
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pickDistractors(correctIdx, n, getter) {
+  const others = VOCAB.map((_, i) => i).filter(i => i !== correctIdx);
+  return shuffle(others).slice(0, n).map(getter);
+}
+
+function buildQuestion(vIdx) {
+  const v = VOCAB[vIdx];
+  const types = ['listen2word', 'meaning2word', 'word2meaning', 'emoji2word', 'cloze'];
+  const type = types[Math.floor(Math.random() * types.length)];
+
+  if (type === 'listen2word') {
+    const opts = shuffle([v.word, ...pickDistractors(vIdx, 3, i => VOCAB[i].word)]);
+    return {
+      type, vIdx,
+      promptHTML: `<div class="quiz-question">🎧 Listen and choose the word</div>
+                   <button class="btn btn-secondary quiz-listen" data-listen="${v.word}">🔊 Play word</button>`,
+      autoplay: v.word,
+      opts,
+      correct: opts.indexOf(v.word),
+      explain: `Đáp án là <b>"${v.word}"</b> — ${v.meaning}`
+    };
+  }
+  if (type === 'meaning2word') {
+    const opts = shuffle([v.word, ...pickDistractors(vIdx, 3, i => VOCAB[i].word)]);
+    return {
+      type, vIdx,
+      promptHTML: `<div class="quiz-question">Từ tiếng Anh nào nghĩa là:<br><span class="word">${v.meaning}</span></div>`,
+      opts,
+      correct: opts.indexOf(v.word),
+      explain: `<b>"${v.word}"</b> /${v.ipa.replace(/[\/]/g,'')}/ nghĩa là "${v.meaning}"`
+    };
+  }
+  if (type === 'word2meaning') {
+    const opts = shuffle([v.meaning, ...pickDistractors(vIdx, 3, i => VOCAB[i].meaning)]);
+    return {
+      type, vIdx,
+      promptHTML: `<div class="quiz-emoji">${v.emoji}</div>
+                   <div class="quiz-question"><span class="word">${v.word}</span> nghĩa là gì?</div>`,
+      opts,
+      correct: opts.indexOf(v.meaning),
+      explain: `<b>"${v.word}"</b> nghĩa là "${v.meaning}". Ví dụ: ${v.example}`
+    };
+  }
+  if (type === 'emoji2word') {
+    const opts = shuffle([v.word, ...pickDistractors(vIdx, 3, i => VOCAB[i].word)]);
+    return {
+      type, vIdx,
+      promptHTML: `<div class="quiz-emoji" style="font-size:90px;">${v.emoji}</div>
+                   <div class="quiz-question">Đây là gì?</div>`,
+      opts,
+      correct: opts.indexOf(v.word),
+      explain: `${v.emoji} là <b>"${v.word}"</b> — ${v.meaning}`
+    };
+  }
+  if (type === 'cloze') {
+    // Replace word in example with blank (case-insensitive)
+    const re = new RegExp(`\\b${v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+    let blanked = v.example.replace(re, '_____');
+    if (blanked === v.example) blanked = v.example + ' (___)';
+    const opts = shuffle([v.word, ...pickDistractors(vIdx, 3, i => VOCAB[i].word)]);
+    return {
+      type, vIdx,
+      promptHTML: `<div class="quiz-question">Điền từ phù hợp:<br><span class="word">${blanked}</span></div>`,
+      opts,
+      correct: opts.indexOf(v.word),
+      explain: `Câu đầy đủ: "${v.example}" — <b>${v.word}</b> = ${v.meaning}`
+    };
+  }
+}
+
+function generateQuizSet(indices, length = 10) {
+  const pool = indices.length >= length
+    ? shuffle(indices).slice(0, length)
+    : shuffle([...indices, ...indices]).slice(0, length);
+  return pool.map(i => buildQuestion(i));
+}
+
+function renderQuestion() {
+  const q = state.qSet[state.qIndex];
+  qNum.textContent = state.qIndex + 1;
+  qScoreEl.textContent = state.qScore;
+  qBarFill.style.width = ((state.qIndex) / state.qSet.length * 100) + '%';
+  qNextWrap.classList.add('hidden');
+
+  qStage.innerHTML = `
+    ${q.promptHTML}
+    <div class="quiz-options">
+      ${q.opts.map((opt, i) => `
+        <button class="quiz-option" data-i="${i}">
+          <span class="letter">${String.fromCharCode(65 + i)}</span>
+          <span>${opt}</span>
+        </button>
+      `).join('')}
+    </div>
+    <div class="quiz-explain" id="qExplain"></div>
+  `;
+
+  // Auto play audio for listen-type
+  if (q.autoplay) {
+    setTimeout(() => speak(q.autoplay, { rate: 0.85 }), 350);
+  }
+
+  // Listen button (if any)
+  qStage.querySelectorAll('[data-listen]').forEach(btn => {
+    btn.addEventListener('click', () => speak(btn.dataset.listen, { rate: 0.85 }));
+  });
+
+  // Options
+  qStage.querySelectorAll('.quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => handleAnswer(parseInt(btn.dataset.i)));
+  });
+}
+
+function handleAnswer(chosenIdx) {
+  const q = state.qSet[state.qIndex];
+  const opts = qStage.querySelectorAll('.quiz-option');
+  opts.forEach(o => o.disabled = true);
+
+  const isCorrect = chosenIdx === q.correct;
+  opts[chosenIdx].classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) opts[q.correct].classList.add('correct');
+
+  const explainEl = document.getElementById('qExplain');
+  explainEl.innerHTML = (isCorrect ? '✅ Correct! ' : '❌ Not quite. ') + q.explain;
+  explainEl.classList.add('visible');
+
+  if (isCorrect) {
+    state.qScore += 10;
+  } else {
+    state.qWrong.push(q.vIdx);
+  }
+  qScoreEl.textContent = state.qScore;
+  saveState();
+
+  qNextWrap.classList.remove('hidden');
+}
+
+qNextBtn.addEventListener('click', () => {
+  if (state.qIndex < state.qSet.length - 1) {
+    state.qIndex++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+function finishQuiz() {
+  document.querySelector('#step-quiz > .card').classList.add('hidden');
+  qComplete.classList.remove('hidden');
+  qBarFill.style.width = '100%';
+  const total = state.qSet.length;
+  const correct = (state.qScore / 10);
+  const pct = Math.round((correct / total) * 100);
+  qFinalScore.textContent = state.qScore;
+  qCorrectEl.textContent = `${correct}/${total}`;
+  qPercent.textContent = pct + '%';
+  if (pct === 100) {
+    qBigEmoji.textContent = '🏆';
+    qTitle.textContent = 'Perfect score!';
+    qSubtitle.textContent = "You're a vocabulary champion!";
+  } else if (pct >= 80) {
+    qBigEmoji.textContent = '🌟';
+    qTitle.textContent = 'Great job!';
+    qSubtitle.textContent = "Almost perfect — keep going!";
+  } else if (pct >= 60) {
+    qBigEmoji.textContent = '👍';
+    qTitle.textContent = 'Good work!';
+    qSubtitle.textContent = "Try the wrong ones again to master them.";
+  } else {
+    qBigEmoji.textContent = '💪';
+    qTitle.textContent = 'Keep practicing!';
+    qSubtitle.textContent = "You'll get better with another round.";
+  }
+
+  if (!state.stepsCompleted.quiz && pct >= 60) {
+    markStepDone('quiz');
+    celebrate();
+  }
+  // Hide retry if no wrong
+  qRetryBtn.style.display = state.qWrong.length ? '' : 'none';
+  saveState();
+}
+
+qRetryBtn.addEventListener('click', () => {
+  if (state.qWrong.length === 0) return;
+  state.qSet = generateQuizSet([...new Set(state.qWrong)], state.qWrong.length);
+  state.qIndex = 0;
+  state.qScore = 0;
+  state.qWrong = [];
+  state.qRetryMode = true;
+  qComplete.classList.add('hidden');
+  document.querySelector('#step-quiz > .card').classList.remove('hidden');
+  qTotal.textContent = state.qSet.length;
+  renderQuestion();
+});
+
+qRestartBtn.addEventListener('click', () => {
+  state.qSet = generateQuizSet(VOCAB.map((_, i) => i), 10);
+  state.qIndex = 0;
+  state.qScore = 0;
+  state.qWrong = [];
+  state.qRetryMode = false;
+  qComplete.classList.add('hidden');
+  document.querySelector('#step-quiz > .card').classList.remove('hidden');
+  qTotal.textContent = state.qSet.length;
+  renderQuestion();
+});
+
+function initQuiz() {
+  if (state.qSet.length === 0 || state.qIndex >= state.qSet.length) {
+    state.qSet = generateQuizSet(VOCAB.map((_, i) => i), 10);
+    state.qIndex = 0;
+    state.qScore = 0;
+    state.qWrong = [];
+  }
+  qTotal.textContent = state.qSet.length;
+  qComplete.classList.add('hidden');
+  document.querySelector('#step-quiz > .card').classList.remove('hidden');
+  renderQuestion();
+}
+
+/* ============================================================
+   CELEBRATION 🎊
+============================================================ */
+function celebrate() {
+  const colors = ['#ff6b6b', '#4ecdc4', '#ffd166', '#a685e2', '#6bcf7f'];
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[i % colors.length];
+    c.style.animationDelay = (Math.random() * 0.6) + 's';
+    c.style.animationDuration = (1.8 + Math.random() * 1.4) + 's';
+    c.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3500);
+  }
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+function init() {
+  // Restore step locks
+  if (state.stepsCompleted.flashcard) { unlockStep('shadowing'); document.querySelector('.step-btn[data-step="flashcard"]').classList.add('done'); }
+  if (state.stepsCompleted.shadowing) { unlockStep('dictation'); document.querySelector('.step-btn[data-step="shadowing"]').classList.add('done'); }
+  if (state.stepsCompleted.dictation) { unlockStep('quiz'); document.querySelector('.step-btn[data-step="dictation"]').classList.add('done'); }
+  if (state.stepsCompleted.quiz) { document.querySelector('.step-btn[data-step="quiz"]').classList.add('done'); }
+  document.getElementById('streakNum').textContent = state.stars;
+
+  // Restore current speed selection
+  document.querySelectorAll('.speed-btn').forEach(b => {
+    b.classList.toggle('active', parseFloat(b.dataset.speed) === state.shSpeed);
+  });
+
+  goToStep(state.currentStep);
+}
+
+// Wait a tick for voices, then init
+setTimeout(init, 200);
+</script>
+</body>
+</html>
