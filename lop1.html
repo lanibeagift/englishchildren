@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lớp 1 — Global Success</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Bảng màu Lớp 1 — hồng đào ấm áp, mềm mại cho trẻ em */
+    --bg: #ffd6d0;
+    --bg-soft: #ffe4e0;
+    --ink: #7a1f1f;
+    --ink-soft: #a64545;
+    --paper: #fff8f6;
+    --accent: #ff5b2e;
+    --accent-2: #f4c542;
+    --accent-3: #2d4cc8;
+  }
+
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+  html, body{
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+  body{
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(122, 31, 31, 0.08) 1px, transparent 0);
+    background-size: 26px 26px;
+  }
+  a{ color: inherit; text-decoration: none; }
+
+  /* ========== HEADER ========== */
+  header{
+    padding: 20px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--ink);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .back{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border: 1.5px solid var(--ink);
+    border-radius: 100px;
+    transition: all 0.25s ease;
+    background: var(--paper);
+  }
+  .back:hover{
+    background: var(--ink);
+    color: var(--bg);
+    transform: translateX(-3px);
+  }
+  .crumb{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .crumb strong{ color: var(--accent); font-weight: 600; }
+
+  /* ========== HERO ========== */
+  .hero{
+    padding: 80px 5vw 60px;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-num{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(220px, 38vw, 560px);
+    line-height: 0.85;
+    color: var(--accent);
+    opacity: 0.16;
+    position: absolute;
+    right: -3vw;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-variation-settings: "opsz" 144;
+    user-select: none;
+  }
+  .level{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .level::before{
+    content: ""; width: 36px; height: 2px; background: var(--accent);
+  }
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(56px, 10vw, 160px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  h1 em{
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  .topics{
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 2.4vw, 30px);
+    font-style: italic;
+    font-weight: 400;
+    max-width: 640px;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+    color: var(--ink-soft);
+  }
+
+  .hero-stats{
+    margin-top: 48px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .stat{
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num{
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .stat-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    opacity: 0.7;
+  }
+
+  /* ========== SECTION HEADING ========== */
+  .section-head{
+    padding: 80px 5vw 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .section-head h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .section-head h2 em{
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  .section-head .num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .section-head .desc{
+    max-width: 380px;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ========== TWO MAIN MODULES ========== */
+  .modules{
+    padding: 0 5vw 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .module{
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 40px 32px 36px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .module:hover{
+    transform: translate(-5px, -5px);
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  .module-icon{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 240px;
+    line-height: 0.8;
+    color: var(--accent);
+    opacity: 0.1;
+    position: absolute;
+    bottom: -40px;
+    right: -10px;
+    pointer-events: none;
+    user-select: none;
+  }
+  .module-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    position: relative;
+    z-index: 1;
+  }
+  .module h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(36px, 4vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 18px 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .module h3 em{
+    font-style: italic;
+    font-weight: 300;
+  }
+  .module p{
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.8;
+    max-width: 90%;
+    position: relative;
+    z-index: 1;
+  }
+  .module-cta{
+    margin-top: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 100px;
+    align-self: flex-start;
+    position: relative;
+    z-index: 1;
+    transition: gap 0.3s ease;
+  }
+  .module:hover .module-cta{
+    gap: 18px;
+  }
+
+  /* ========== UNIT LIST ========== */
+  .units{
+    padding: 0 5vw 80px;
+  }
+  .unit-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .unit{
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    cursor: pointer;
+    min-height: 140px;
+  }
+  .unit:hover{
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 var(--ink);
+    background: var(--bg-soft);
+  }
+  .unit-num{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 0.85;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .unit-name{
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    margin-top: auto;
+    line-height: 1.2;
+  }
+  .unit-meta{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .unit.placeholder-unit{
+    border-style: dashed;
+    background: transparent;
+    opacity: 0.5;
+  }
+  .unit.placeholder-unit:hover{
+    opacity: 0.8;
+  }
+
+  /* ========== ABOUT BAND ========== */
+  .about{
+    background: var(--ink);
+    color: var(--bg);
+    padding: 80px 5vw;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 56px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .about h2 em{
+    font-style: italic;
+    font-weight: 900;
+    color: var(--accent-2);
+  }
+  .about-content p{
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    opacity: 0.85;
+  }
+  .about-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-bottom: 16px;
+  }
+
+  /* ========== PLACEHOLDER NOTICE ========== */
+  .placeholder-notice{
+    margin: 0 5vw 80px;
+    border: 2px dashed var(--ink);
+    padding: 56px 32px;
+    text-align: center;
+    background: var(--bg-soft);
+  }
+  .placeholder-notice .badge{
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: var(--accent);
+    color: var(--paper);
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .placeholder-notice h3{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(24px, 3.4vw, 40px);
+    line-height: 1.2;
+    max-width: 600px;
+    margin: 0 auto 16px;
+  }
+  .placeholder-notice p{
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ========== FOOTER ========== */
+  footer{
+    padding: 32px 5vw;
+    border-top: 2px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    opacity: 0.75;
+    background: var(--bg);
+  }
+
+  /* ========== ANIMATIONS ========== */
+  .hero > *:not(.hero-num){
+    opacity: 0;
+    animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .level{ animation-delay: 0.05s; }
+  h1{ animation-delay: 0.15s; }
+  .topics{ animation-delay: 0.25s; }
+  .hero-stats{ animation-delay: 0.35s; }
+
+  .module{
+    opacity: 0;
+    animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .module:nth-child(1){ animation-delay: 0.45s; }
+  .module:nth-child(2){ animation-delay: 0.55s; }
+
+  .unit{
+    opacity: 0;
+    animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .unit:nth-child(1){ animation-delay: 0.1s; }
+  .unit:nth-child(2){ animation-delay: 0.15s; }
+  .unit:nth-child(3){ animation-delay: 0.20s; }
+  .unit:nth-child(4){ animation-delay: 0.25s; }
+  .unit:nth-child(5){ animation-delay: 0.30s; }
+  .unit:nth-child(6){ animation-delay: 0.35s; }
+  .unit:nth-child(7){ animation-delay: 0.40s; }
+  .unit:nth-child(8){ animation-delay: 0.45s; }
+
+  @keyframes rise {
+    from{ opacity: 0; transform: translateY(24px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 860px){
+    .modules{ grid-template-columns: 1fr; }
+    .about{ grid-template-columns: 1fr; gap: 32px; padding: 60px 5vw; }
+    .hero-num{ opacity: 0.1; }
+    .hero{ padding: 60px 5vw 50px; }
+    .hero-stats{ gap: 28px; }
+    .stat-num{ font-size: 36px; }
+  }
+  @media (max-width: 480px){
+    .crumb{ display: none; }
+    header{ padding: 16px 5vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <a href="index.html" class="back">← Trang chủ</a>
+  <div class="crumb">Global Success / <strong>Lớp 1</strong></div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-num">01</div>
+  <div class="level">Tiểu học · Beginner · A0</div>
+  <h1>Lớp 1<em>.</em></h1>
+  <p class="topics">Những bài học đầu tiên — bảng chữ cái, số đếm, lời chào và những từ quen thuộc quanh em.</p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">—</span>
+      <span class="stat-label">Units</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">—</span>
+      <span class="stat-label">Từ vựng</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">—</span>
+      <span class="stat-label">Bài nghe</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TWO MAIN MODULES ========== -->
+<div class="section-head">
+  <div>
+    <span class="num">// 01 — KỸ NĂNG CHÍNH</span>
+    <h2>Hai <em>kỹ năng</em>, một hành trình</h2>
+  </div>
+  <p class="desc">Lớp 1 tập trung vào nghe và làm quen từ vựng qua hình ảnh, âm thanh — chưa cần đọc viết phức tạp.</p>
+</div>
+
+<section class="modules">
+  <a href="#vocab" class="module">
+    <div>
+      <div class="module-tag">// 01 — Vocabulary</div>
+      <h3>Từ <em>vựng</em></h3>
+      <p>Học từ mới theo chủ đề: gia đình, đồ vật, màu sắc, con vật. Mỗi từ có hình minh họa và phát âm chuẩn.</p>
+    </div>
+    <span class="module-cta">Bắt đầu học →</span>
+    <span class="module-icon">A</span>
+  </a>
+
+  <a href="#listening" class="module">
+    <div>
+      <div class="module-tag">// 02 — Listening</div>
+      <h3>Luyện <em>nghe</em></h3>
+      <p>Nghe các đoạn hội thoại ngắn, bài hát thiếu nhi. Bé tập bắt chước và nhận diện âm thanh tiếng Anh.</p>
+    </div>
+    <span class="module-cta">Bắt đầu nghe →</span>
+    <span class="module-icon">♫</span>
+  </a>
+</section>
+
+<!-- ========== UNITS ========== -->
+<div class="section-head" id="units">
+  <div>
+    <span class="num">// 02 — DANH SÁCH UNIT</span>
+    <h2>Các <em>bài học</em></h2>
+  </div>
+  <p class="desc">Mỗi unit là một chủ đề nhỏ với từ vựng, bài nghe và bài tập tương ứng. Bấm vào để xem chi tiết.</p>
+</div>
+
+<section class="units">
+  <div class="unit-grid">
+
+    <!-- TODO: Cập nhật danh sách unit thật của Lớp 1 ở đây -->
+    <a href="#" class="unit placeholder-unit">
+      <div class="unit-num">01</div>
+      <div class="unit-meta">Unit 1</div>
+      <div class="unit-name">Tên unit ở đây</div>
+    </a>
+
+    <a href="#" class="unit placeholder-unit">
+      <div class="unit-num">02</div>
+      <div class="unit-meta">Unit 2</div>
+      <div class="unit-name">Tên unit ở đây</div>
+    </a>
+
+    <a href="#" class="unit placeholder-unit">
+      <div class="unit-num">03</div>
+      <div class="unit-meta">Unit 3</div>
+      <div class="unit-name">Tên unit ở đây</div>
+    </a>
+
+    <a href="#" class="unit placeholder-unit">
+      <div class="unit-num">04</div>
+      <div class="unit-meta">Unit 4</div>
+      <div class="unit-name">Tên unit ở đây</div>
+    </a>
+
+    <a href="#" class="unit placeholder-unit">
+      <div class="unit-num">05</div>
+      <div class="unit-meta">Unit 5</div>
+      <div class="unit-name">Tên unit ở đây</div>
+    </a>
+
+    <a href="#" class="unit placeholder-unit">
+      <div class="unit-num">06</div>
+      <div class="unit-meta">Unit 6</div>
+      <div class="unit-name">Tên unit ở đây</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ========== ABOUT BAND ========== -->
+<section class="about">
+  <h2>Bắt đầu từ <em>nền tảng</em>, vững vàng từng bước.</h2>
+  <div class="about-content">
+    <div class="about-tag">// Về chương trình Lớp 1</div>
+    <p>Tiếng Anh Lớp 1 theo bộ sách Global Success được thiết kế cho bé mới làm quen với tiếng Anh. Trọng tâm là âm thanh, hình ảnh và sự lặp lại tự nhiên.</p>
+    <p>Bé chưa cần đọc — chỉ cần nghe, nhìn và bắt chước. Mỗi bài học ngắn, vui, phù hợp với khả năng tập trung của trẻ 6 tuổi.</p>
+  </div>
+</section>
+
+<!-- ========== PLACEHOLDER NOTICE ========== -->
+<div class="placeholder-notice">
+  <span class="badge">Sắp cập nhật</span>
+  <h3>Nội dung chi tiết của Lớp 1 sẽ được thêm vào đây.</h3>
+  <p>Danh sách từ vựng, audio luyện nghe và bài tập tương tác đang được chuẩn bị. Bạn hãy cập nhật nội dung vào các khu vực được đánh dấu trong file HTML này.</p>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div>© 2026 · Global Success Learning</div>
+  <div>Lớp 1 · Tiểu học · Beginner</div>
+</footer>
+
+</body>
+</html>
