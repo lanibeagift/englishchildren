@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Global Success — Chương trình Tiếng Anh Tiểu học & THCS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #faf6ef;
+    --ink: #0f1419;
+    --ink-soft: #2a3540;
+    --paper: #ffffff;
+    --line: #1a1f26;
+    --accent: #ff5b2e;
+    --accent-2: #2d4cc8;
+    --accent-3: #f4c542;
+
+    /* Per-grade palettes — mỗi lớp một cá tính */
+    --g1-bg:#ffd6d0; --g1-ink:#7a1f1f; --g1-accent:#ff5b2e;
+    --g2-bg:#ffe9b3; --g2-ink:#5c3a00; --g2-accent:#f4a300;
+    --g3-bg:#d4f0c4; --g3-ink:#1f4d1a; --g3-accent:#3d8b2e;
+    --g4-bg:#bfe4f5; --g4-ink:#0d3a5c; --g4-accent:#1e7fb8;
+    --g5-bg:#d6d0f5; --g5-ink:#2a1f6b; --g5-accent:#5b3fd6;
+
+    --g6-bg:#0f1419; --g6-ink:#f4c542; --g6-accent:#f4c542;
+    --g7-bg:#1a2e1f; --g7-ink:#a8e063; --g7-accent:#a8e063;
+    --g8-bg:#2b1a3d; --g8-ink:#ff8fb1; --g8-accent:#ff8fb1;
+    --g9-bg:#1c1c1c; --g9-ink:#ff5b2e; --g9-accent:#ff5b2e;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:var(--bg); color:var(--ink); }
+  body{
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(15,20,25,0.07) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ===== Top ribbon ===== */
+  .ribbon{
+    background: var(--ink);
+    color: var(--bg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    overflow: hidden;
+    border-bottom: 2px solid var(--ink);
+  }
+  .ribbon-track{
+    display: flex;
+    gap: 48px;
+    white-space: nowrap;
+    animation: scroll 40s linear infinite;
+  }
+  .ribbon span{ display: inline-flex; align-items: center; gap: 12px; }
+  .ribbon span::before{ content: "✦"; color: var(--accent-3); }
+  @keyframes scroll {
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+
+  /* ===== Header ===== */
+  header{
+    border-bottom: 2px solid var(--ink);
+    padding: 20px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    position: relative;
+  }
+  .logo{
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark{
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: var(--bg);
+    font-weight: 900;
+    font-style: italic;
+    transform: rotate(-8deg);
+  }
+  nav{
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  nav a{ position: relative; }
+  nav a:hover::after{
+    content:""; position:absolute; left:0; right:0; bottom:-4px;
+    height: 2px; background: var(--accent);
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    padding: 80px 5vw 60px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    align-items: end;
+    position: relative;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero-eyebrow{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before{
+    content:""; width:32px; height:2px; background: var(--accent);
+  }
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 120px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  h1 em{
+    font-style: italic;
+    font-weight: 900;
+    color: var(--accent);
+    font-variation-settings: "opsz" 144;
+  }
+  h1 .underline{
+    position: relative;
+    display: inline-block;
+  }
+  h1 .underline::after{
+    content:""; position:absolute; left:-2%; right:-2%; bottom: 0.08em;
+    height: 0.18em; background: var(--accent-3);
+    z-index: -1;
+    transform: skew(-2deg);
+  }
+  .hero-meta{
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 24px;
+    box-shadow: 8px 8px 0 var(--ink);
+    transform: rotate(1.5deg);
+  }
+  .hero-meta-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--accent-2);
+  }
+  .hero-meta p{
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  .hero-meta .stat{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  /* ===== Section heading ===== */
+  .section-head{
+    padding: 60px 5vw 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .section-head h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(32px, 4vw, 56px);
+    letter-spacing: -0.02em;
+  }
+  .section-head h2 .num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5em;
+    color: var(--accent);
+    vertical-align: super;
+    margin-right: 8px;
+    font-weight: 400;
+  }
+  .section-head .desc{
+    max-width: 420px;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  /* ===== Grade grid ===== */
+  .grades{
+    padding: 0 5vw 80px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+  }
+
+  .grade-card{
+    border: 2px solid var(--ink);
+    padding: 28px 24px 24px;
+    background: var(--card-bg, var(--paper));
+    color: var(--card-ink, var(--ink));
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-height: 240px;
+  }
+  .grade-card:hover{
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .grade-card:hover .grade-arrow{
+    transform: translate(8px, -8px) rotate(-45deg);
+  }
+
+  /* Layout — primary (1-5) row 1 spans, secondary (6-9) row 2 different sizes */
+  .grade-card[data-grade="1"]{ grid-column: span 4; }
+  .grade-card[data-grade="2"]{ grid-column: span 4; }
+  .grade-card[data-grade="3"]{ grid-column: span 4; }
+  .grade-card[data-grade="4"]{ grid-column: span 6; }
+  .grade-card[data-grade="5"]{ grid-column: span 6; }
+
+  .grade-card[data-grade="6"]{ grid-column: span 3; }
+  .grade-card[data-grade="7"]{ grid-column: span 3; }
+  .grade-card[data-grade="8"]{ grid-column: span 3; }
+  .grade-card[data-grade="9"]{ grid-column: span 3; }
+
+  .grade-num{
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(72px, 9vw, 140px);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--card-accent, var(--accent));
+    margin-bottom: 16px;
+    font-variation-settings: "opsz" 144;
+  }
+  .grade-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    opacity: 0.75;
+  }
+  .grade-title{
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+    line-height: 1.15;
+  }
+  .grade-subtitle{
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: auto;
+    padding-top: 20px;
+  }
+  .grade-tags{
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .grade-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border: 1px solid currentColor;
+    border-radius: 100px;
+    opacity: 0.85;
+  }
+  .grade-arrow{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--card-ink, var(--ink));
+    border-radius: 50%;
+    display: grid; place-items: center;
+    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    color: var(--card-ink, var(--ink));
+  }
+
+  /* Decorative sticker for primary grades */
+  .grade-card[data-tier="primary"] .grade-deco{
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    font-family: 'Fraunces', serif;
+    font-size: 180px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--card-accent);
+    opacity: 0.08;
+    pointer-events: none;
+    font-style: italic;
+  }
+
+  /* Secondary grade specific styling */
+  .grade-card[data-tier="secondary"]{
+    border-color: var(--card-ink);
+  }
+  .grade-card[data-tier="secondary"] .grade-arrow{
+    border-color: var(--card-accent);
+  }
+  .grade-card[data-tier="secondary"] .grade-num{
+    color: var(--card-accent);
+  }
+
+  /* ===== Features section ===== */
+  .features{
+    background: var(--ink);
+    color: var(--bg);
+    padding: 80px 5vw;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+  .features-head{
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .features-head h2{
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    max-width: 700px;
+  }
+  .features-head h2 em{
+    font-style: italic;
+    font-weight: 900;
+    color: var(--accent-3);
+  }
+  .features-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(250,246,239,0.2);
+  }
+  .feature{
+    padding: 40px 32px;
+    border-bottom: 1px solid rgba(250,246,239,0.2);
+    border-right: 1px solid rgba(250,246,239,0.2);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .feature:nth-child(2n){ border-right: none; }
+  .feature-num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--accent-3);
+    padding-top: 6px;
+  }
+  .feature h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .feature p{
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    padding: 40px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* Stagger entrance */
+  .grade-card{
+    opacity: 0;
+    animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .grade-card:nth-child(1){ animation-delay: 0.05s; }
+  .grade-card:nth-child(2){ animation-delay: 0.10s; }
+  .grade-card:nth-child(3){ animation-delay: 0.15s; }
+  .grade-card:nth-child(4){ animation-delay: 0.20s; }
+  .grade-card:nth-child(5){ animation-delay: 0.25s; }
+  .grade-card:nth-child(6){ animation-delay: 0.32s; }
+  .grade-card:nth-child(7){ animation-delay: 0.36s; }
+  .grade-card:nth-child(8){ animation-delay: 0.40s; }
+  .grade-card:nth-child(9){ animation-delay: 0.44s; }
+  @keyframes rise {
+    from{ opacity: 0; transform: translateY(24px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 960px){
+    .hero{ grid-template-columns: 1fr; gap: 40px; padding: 50px 5vw; }
+    .hero-meta{ transform: rotate(0); }
+    .grade-card[data-grade="1"],
+    .grade-card[data-grade="2"],
+    .grade-card[data-grade="3"]{ grid-column: span 6; }
+    .grade-card[data-grade="4"],
+    .grade-card[data-grade="5"]{ grid-column: span 12; }
+    .grade-card[data-grade="6"],
+    .grade-card[data-grade="7"],
+    .grade-card[data-grade="8"],
+    .grade-card[data-grade="9"]{ grid-column: span 6; }
+    .features-grid{ grid-template-columns: 1fr; }
+    .feature{ border-right: none; }
+    nav{ display: none; }
+  }
+  @media (max-width: 560px){
+    .grade-card[data-grade="1"],
+    .grade-card[data-grade="2"],
+    .grade-card[data-grade="3"],
+    .grade-card[data-grade="4"],
+    .grade-card[data-grade="5"],
+    .grade-card[data-grade="6"],
+    .grade-card[data-grade="7"],
+    .grade-card[data-grade="8"],
+    .grade-card[data-grade="9"]{ grid-column: span 12; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Marquee ribbon -->
+<div class="ribbon">
+  <div class="ribbon-track">
+    <span>Global Success Curriculum</span>
+    <span>Vocabulary Mastery</span>
+    <span>Listening Practice</span>
+    <span>Grades 1 to 9</span>
+    <span>Bộ Giáo dục & Đào tạo</span>
+    <span>Updated 2025-2026</span>
+    <span>Global Success Curriculum</span>
+    <span>Vocabulary Mastery</span>
+    <span>Listening Practice</span>
+    <span>Grades 1 to 9</span>
+    <span>Bộ Giáo dục & Đào tạo</span>
+    <span>Updated 2025-2026</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <span class="logo-mark">G</span>
+    <span>Global<em style="font-style:italic; color:var(--accent);">.</em>Success</span>
+  </div>
+  <nav>
+    <a href="#grades">Các lớp</a>
+    <a href="#features">Tính năng</a>
+    <a href="#about">Về chương trình</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Chương trình tiếng Anh · Lớp 1 → 9</div>
+    <h1>
+      Học <em>từ vựng</em>,<br>
+      luyện <span class="underline">nghe hiểu</span><br>
+      theo bộ <em>Global Success</em>.
+    </h1>
+  </div>
+  <aside class="hero-meta">
+    <div class="hero-meta-title">// Mục lục</div>
+    <p>Chọn lớp của con để bắt đầu hành trình học tiếng Anh — từ những từ đầu tiên ở lớp 1 đến giao tiếp tự tin ở lớp 9.</p>
+    <div class="stat">
+      <span>9 cấp lớp</span>
+      <span>EN · VI</span>
+    </div>
+  </aside>
+</section>
+
+<!-- Section: Choose grade -->
+<div class="section-head" id="grades">
+  <h2><span class="num">01</span>Chọn lớp của bạn</h2>
+  <p class="desc">Tiểu học (lớp 1–5) tập trung làm quen âm thanh và từ vựng nền tảng. THCS (lớp 6–9) đẩy mạnh kỹ năng nghe và mở rộng vốn từ học thuật.</p>
+</div>
+
+<!-- Grade cards -->
+<section class="grades">
+
+  <!-- PRIMARY -->
+  <a href="lop1.html" class="grade-card" data-grade="1" data-tier="primary"
+     style="--card-bg: var(--g1-bg); --card-ink: var(--g1-ink); --card-accent: var(--g1-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">01</div>
+    <div class="grade-label">Tiểu học · Beginner</div>
+    <div class="grade-title">Lớp 1</div>
+    <div class="grade-tags">
+      <span class="grade-tag">Bảng chữ cái</span>
+      <span class="grade-tag">Chào hỏi</span>
+    </div>
+    <div class="grade-subtitle">Những bài học đầu tiên — đầy màu sắc, đầy âm thanh.</div>
+    <div class="grade-deco">A</div>
+  </a>
+
+  <a href="lop2.html" class="grade-card" data-grade="2" data-tier="primary"
+     style="--card-bg: var(--g2-bg); --card-ink: var(--g2-ink); --card-accent: var(--g2-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">02</div>
+    <div class="grade-label">Tiểu học · Beginner</div>
+    <div class="grade-title">Lớp 2</div>
+    <div class="grade-tags">
+      <span class="grade-tag">Số đếm</span>
+      <span class="grade-tag">Gia đình</span>
+    </div>
+    <div class="grade-subtitle">Mở rộng từ vựng quanh nhà và trường lớp.</div>
+    <div class="grade-deco">B</div>
+  </a>
+
+  <a href="lop3.html" class="grade-card" data-grade="3" data-tier="primary"
+     style="--card-bg: var(--g3-bg); --card-ink: var(--g3-ink); --card-accent: var(--g3-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">03</div>
+    <div class="grade-label">Tiểu học · Elementary</div>
+    <div class="grade-title">Lớp 3</div>
+    <div class="grade-tags">
+      <span class="grade-tag">Câu đơn</span>
+      <span class="grade-tag">Hội thoại</span>
+    </div>
+    <div class="grade-subtitle">Bắt đầu nói thành câu — nghe và phản xạ.</div>
+    <div class="grade-deco">C</div>
+  </a>
+
+  <a href="lop4.html" class="grade-card" data-grade="4" data-tier="primary"
+     style="--card-bg: var(--g4-bg); --card-ink: var(--g4-ink); --card-accent: var(--g4-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">04</div>
+    <div class="grade-label">Tiểu học · Elementary</div>
+    <div class="grade-title">Lớp 4 — Nói thành câu</div>
+    <div class="grade-tags">
+      <span class="grade-tag">Thì hiện tại</span>
+      <span class="grade-tag">Sở thích</span>
+      <span class="grade-tag">Bạn bè</span>
+    </div>
+    <div class="grade-subtitle">Học sinh kể chuyện về bản thân, gia đình, bạn bè bằng câu hoàn chỉnh.</div>
+    <div class="grade-deco">D</div>
+  </a>
+
+  <a href="lop5.html" class="grade-card" data-grade="5" data-tier="primary"
+     style="--card-bg: var(--g5-bg); --card-ink: var(--g5-ink); --card-accent: var(--g5-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">05</div>
+    <div class="grade-label">Tiểu học · Pre-Intermediate</div>
+    <div class="grade-title">Lớp 5 — Cầu nối lên cấp 2</div>
+    <div class="grade-tags">
+      <span class="grade-tag">Thì quá khứ</span>
+      <span class="grade-tag">Du lịch</span>
+      <span class="grade-tag">Kể chuyện</span>
+    </div>
+    <div class="grade-subtitle">Củng cố kỹ năng nghe — chuẩn bị bước vào THCS với nền tảng vững.</div>
+    <div class="grade-deco">E</div>
+  </a>
+
+  <!-- SECONDARY -->
+  <a href="lop6.html" class="grade-card" data-grade="6" data-tier="secondary"
+     style="--card-bg: var(--g6-bg); --card-ink: var(--g6-ink); --card-accent: var(--g6-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">06</div>
+    <div class="grade-label" style="color:var(--g6-accent)">THCS · A1</div>
+    <div class="grade-title">Lớp 6</div>
+    <div class="grade-subtitle" style="opacity:0.6;">My new school. New friends.</div>
+  </a>
+
+  <a href="lop7.html" class="grade-card" data-grade="7" data-tier="secondary"
+     style="--card-bg: var(--g7-bg); --card-ink: var(--g7-ink); --card-accent: var(--g7-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">07</div>
+    <div class="grade-label" style="color:var(--g7-accent)">THCS · A2</div>
+    <div class="grade-title">Lớp 7</div>
+    <div class="grade-subtitle" style="opacity:0.6;">Hobbies. Health. Community.</div>
+  </a>
+
+  <a href="lop8.html" class="grade-card" data-grade="8" data-tier="secondary"
+     style="--card-bg: var(--g8-bg); --card-ink: var(--g8-ink); --card-accent: var(--g8-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">08</div>
+    <div class="grade-label" style="color:var(--g8-accent)">THCS · A2+</div>
+    <div class="grade-title">Lớp 8</div>
+    <div class="grade-subtitle" style="opacity:0.6;">Leisure. Life in the countryside.</div>
+  </a>
+
+  <a href="lop9.html" class="grade-card" data-grade="9" data-tier="secondary"
+     style="--card-bg: var(--g9-bg); --card-ink: var(--g9-ink); --card-accent: var(--g9-accent);">
+    <div class="grade-arrow">↗</div>
+    <div class="grade-num">09</div>
+    <div class="grade-label" style="color:var(--g9-accent)">THCS · B1</div>
+    <div class="grade-title">Lớp 9</div>
+    <div class="grade-subtitle" style="opacity:0.6;">Local environment. English in the world.</div>
+  </a>
+
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="features-head">
+    <h2>Hai kỹ năng,<br>một <em>hành trình</em>.</h2>
+    <p style="max-width: 380px; opacity: 0.7; font-size: 14px;">Mỗi lớp được thiết kế xoay quanh hai trục chính — từ vựng để hiểu, và luyện nghe để giao tiếp.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-num">01 / VOCAB</div>
+      <div>
+        <h3>Từ vựng theo chủ đề</h3>
+        <p>Học từ mới theo đúng chủ đề từng unit của sách Global Success. Có hình minh họa, phát âm chuẩn, ví dụ trong câu và bài tập ghi nhớ.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-num">02 / LISTENING</div>
+      <div>
+        <h3>Luyện nghe theo bài</h3>
+        <p>Audio gốc kèm transcript, câu hỏi hiểu bài, và chế độ nghe chậm — phù hợp với tốc độ tiếp thu của từng học sinh.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-num">03 / PROGRESS</div>
+      <div>
+        <h3>Theo dõi tiến độ</h3>
+        <p>Bảng tiến độ trực quan cho mỗi unit. Học sinh biết mình đã học gì, đã thuộc gì, và còn gì cần ôn lại.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-num">04 / REVIEW</div>
+      <div>
+        <h3>Ôn tập thông minh</h3>
+        <p>Hệ thống tự nhặt ra các từ và bài nghe học sinh hay sai, đưa vào lượt ôn lại tiếp theo. Không học lại cái đã thuộc.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div>© 2026 · Global Success Learning</div>
+  <div>Vietnam · Tiếng Việt / English</div>
+</footer>
+
+</body>
+</html>
